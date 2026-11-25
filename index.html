@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Village Market для AppLovin</title>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* layout: a production board. A short brief, then three scenario sheets (storyboard strip + shot list), then the shared
+   production plan and the approval note. The storyboard strip is the centre of each sheet. */
+:root {
+  --bg: #f1f3ea; --paper: #fbfcf6; --ink: #1f2a22; --muted: #5d6a5f; --line: #d6dccb;
+  --fox: #d9652a; --plum: #6e4f6e; --gold: #c9922a; --leaf: #4f7d3a; --chip: #e7ecdc;
+  --hook: #6e4f6e; --game: #4f7d3a;
+  --display: 'Nunito', 'Trebuchet MS', sans-serif; --body: 'Inter', system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #131714; --paper: #1b201c; --ink: #e9eee4; --muted: #9eaa9f; --line: #2e372f; --fox: #f08a43; --plum: #b48fb4; --gold: #e2b04b;
+  --leaf: #8cc06c; --chip: #252c26; --hook: #b48fb4; --game: #8cc06c; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #131714; --paper: #1b201c; --ink: #e9eee4; --muted: #9eaa9f; --line: #2e372f; --fox: #f08a43; --plum: #b48fb4;
+  --gold: #e2b04b; --leaf: #8cc06c; --chip: #252c26; --hook: #b48fb4; --game: #8cc06c; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; display: grid; gap: 28px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 900; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(28px, 4.4vw, 44px); line-height: 1.05; }
+h2 { font-size: clamp(24px, 3.2vw, 32px); line-height: 1.1; }
+h3 { font-size: 17px; font-weight: 800; }
+p { margin: 0; max-width: 68ch; }
+.lead { font-size: 17px; color: var(--muted); }
+.brief { display: grid; gap: 14px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fact { background: var(--chip); border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 500; }
+.fact b { font-weight: 600; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.sheet { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: clamp(16px, 3vw, 28px); display: grid; gap: 18px; }
+.sheet-head { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: baseline; }
+.letter { font-family: var(--display); font-weight: 900; font-size: 56px; line-height: 0.9; color: var(--fox); grid-row: span 2; }
+.pitch { font-size: 16.5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; background: var(--chip); color: var(--muted); }
+.why { border-left: 3px solid var(--gold); padding: 2px 0 2px 12px; color: var(--ink); }
+.strip-wrap { overflow-x: auto; margin-inline: -4px; padding: 4px 4px 10px; }
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: 142px; gap: 10px; align-items: start; }
+.fr { display: grid; gap: 6px; }
+.fr img { width: 142px; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; display: block; background: var(--chip); }
+.fr.hook img { outline: 3px solid var(--hook); outline-offset: -3px; }
+.fr.game img { outline: 3px solid var(--game); outline-offset: -3px; }
+.fr .t { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.fr .c { font-size: 12.5px; line-height: 1.35; }
+.seam { width: 26px; align-self: center; display: grid; place-items: center; color: var(--muted); font-size: 11px; writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 0.08em; text-transform: uppercase; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.legend .h::before { background: var(--hook); } .legend .g::before { background: var(--game); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 13.5px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-top: 1px solid var(--line); }
+th { font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); font-weight: 600; border-top: none; }
+td.time { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.src { white-space: nowrap; font-size: 12.5px; font-weight: 600; }
+td.src.h { color: var(--hook); } td.src.g { color: var(--game); }
+.sup { font-family: var(--display); font-weight: 800; }
+.sup i { font-style: normal; color: var(--muted); font-family: var(--body); font-weight: 400; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.two > div { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.small { font-size: 13.5px; color: var(--muted); }
+.prompt { font-family: var(--mono); font-size: 12px; background: var(--chip); border-radius: 10px; padding: 10px 12px; overflow-x: auto; white-space: pre-wrap; }
+.plan { display: grid; gap: 10px; counter-reset: s; }
+.step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+.step::before { counter-increment: s; content: counter(s); font-family: var(--display); font-weight: 900; font-size: 20px; color: var(--fox); }
+.cmp th:first-child, .cmp td:first-child { width: 22%; }
+.ok { color: var(--leaf); font-weight: 600; }
+.hooks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hooks figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+.hooks video { width: 100%; max-width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: var(--chip); display: block; }
+.hooks figcaption { font-size: 13.5px; }
+@media (max-width: 560px) { .hooks { grid-template-columns: 1fr; } .hooks video { max-width: 320px; } }
+.approve { background: var(--paper); border: 2px dashed var(--fox); border-radius: 18px; padding: clamp(16px, 3vw, 24px); display: grid; gap: 8px; }
+@media (max-width: 720px) { .two { grid-template-columns: 1fr; } .sheet-head { grid-template-columns: 1fr; } .letter { grid-row: auto; font-size: 44px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="brief">
+  <h1>Village Market: три ролика для AppLovin</h1>
+  <p class="lead">Каждый ролик — 40 секунд. Первые 10 секунд хук, сгенерированный в Seedance 2.5 с нашими героями. Следующие 30 секунд — настоящий геймплей, записанный из актуальной версии 1.0.0, с постановочными ракурсами. Все три сценария утверждены, первые версии хуков — ниже.</p>
+  <div class="facts">
+    <span class="fact"><b>9:16</b> · 1080×1920 · 30 fps</span>
+    <span class="fact"><b>40 с</b> = 10 хук + 30 геймплей</span>
+    <span class="fact">AppLovin: видео без пропуска до 60 с, лучше 30+</span>
+    <span class="fact">Версии <b>RU</b> и <b>EN</b></span>
+    <span class="fact">Хук: <b>Seedance 2.5</b></span>
+  </div>
+  <div class="legend"><span class="h">Хук, генерация Seedance (раскадровка: GPT Image по арту игры)</span><span class="g">Геймплей, запись из игры (на эскизах — только смысл кадра, в ролике будет настоящая игра)</span></div>
+</header>
+
+<section class="sheet" id="hooks">
+  <h2>Хуки, первая версия</h2>
+  <p class="small">Seedance 2.5 reference-to-video, 480p, 9:16, 10 секунд, со звуком. В Seedance ушли только первые 10 секунд сценария плюс кадры раскадровки и арт героев. Три ролика стоили $4.03.</p>
+  <div class="hooks">
+    <figure><video src="hooks/A_v1.mp4" poster="board/poster_A.jpg" controls playsinline preload="none"></video><figcaption><b>A · Ограбление</b></figcaption></figure>
+    <figure><video src="hooks/B_v1.mp4" poster="board/poster_B.jpg" controls playsinline preload="none"></video><figcaption><b>B · Башня</b></figcaption></figure>
+    <figure><video src="hooks/C_v1.mp4" poster="board/poster_C.jpg" controls playsinline preload="none"></video><figcaption><b>C · Очередь</b></figcaption></figure>
+  </div>
+</section>
+
+<!-- ============================== A ============================== -->
+<section class="sheet" id="a">
+  <div class="sheet-head">
+    <div class="letter">A</div>
+    <h2>Ограбление</h2>
+    <p class="pitch">Ночью енот обчистил прилавок Лисички. Игрок отстраивает рынок с одной яблони и сам даёт главарю сдачи.</p>
+  </div>
+  <div class="tags"><span class="tag">история</span><span class="tag">злодей → месть</span><span class="tag">финал: бой с главарём</span></div>
+  <p class="why">Почему сработает: обида и злодей цепляют за 2–3 секунды, а развязка честная — бой с енотом-главарём в игре настоящий. Сюжет «отомсти и отстрой заново» — проверенная схема казуальной рекламы.</p>
+  <div class="strip-wrap"><div class="strip">
+    <div class="fr hook"><img src="board/a_hook_1.jpg" alt="Ночь, енот сгребает пироги в мешок"><span class="t">0,0–3,0</span><span class="c">Ночь. Енот сгребает пироги и монеты в мешок</span></div>
+    <div class="fr hook"><img src="board/a_hook_2.jpg" alt="Енот с мешком показывает «тсс»"><span class="t">3,0–5,5</span><span class="c">Ухмыляется в камеру: «тсс»</span></div>
+    <div class="fr hook"><img src="board/a_hook_3.jpg" alt="Лисичка плачет у пустого прилавка"><span class="t">5,5–7,8</span><span class="c">Рассвет. Пустой прилавок, след лапы, слёзы</span></div>
+    <div class="fr hook"><img src="board/a_hook_4.jpg" alt="Лисичка закатывает рукава"><span class="t">7,8–10,0</span><span class="c">Слёзы → решимость, закатывает рукава</span></div>
+    <div class="seam">склейка в игру</div>
+    <div class="fr game"><img src="board/a_game_1.jpg" alt="Начало: пустая площадь и одна яблоня"><span class="t">10–17</span><span class="c">Пустая площадь, одна яблоня, первая стопка</span></div>
+    <div class="fr game"><img src="board/a_game_2.jpg" alt="Рынок растёт"><span class="t">17–25</span><span class="c">Таймлапс роста: прилавки, печь, помощники</span></div>
+    <div class="fr game"><img src="board/a_game_3.jpg" alt="Бой с главарём"><span class="t">25–35</span><span class="c">Бой с енотом-главарём, победа, ключ</span></div>
+    <div class="fr game"><img src="board/a_game_4.jpg" alt="Карта долины"><span class="t">35–40</span><span class="c">Карта: облака расходятся, новый рынок</span></div>
+  </div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Время</th><th>Кадр</th><th>Источник</th><th>Надпись (RU / EN)</th><th>Звук</th></tr></thead>
+    <tbody>
+      <tr><td class="time">0,0–3,0</td><td>Ночь, луна. Лапа енота сметает пироги и монеты в мешок</td><td class="src h">Seedance</td><td class="sup">Ночью кто-то обчистил рынок… <i>/ Someone robbed the market…</i></td><td>Крадущееся пиццикато, шорох мешка</td></tr>
+      <tr><td class="time">3,0–5,5</td><td>Енот крупно, мешок на плече, палец у губ</td><td class="src h">Seedance</td><td>—</td><td>Ехидный смешок</td></tr>
+      <tr><td class="time">5,5–7,8</td><td>Рассвет. Лисичка у пустого прилавка, крошка и след лапы</td><td class="src h">Seedance</td><td>—</td><td>Грустный вздох, музыка обрывается</td></tr>
+      <tr><td class="time">7,8–10,0</td><td>Решимость, закатывает рукава. Последний кадр = первый кадр игры</td><td class="src h">Seedance</td><td class="sup">Верни всё! <i>/ Get it all back!</i></td><td>Удар барабана, старт главной темы игры</td></tr>
+      <tr><td class="time">10–17</td><td>Пустая площадь, одна яблоня: Лисичка набирает стопку, продаёт, первые монеты</td><td class="src g">Игра</td><td class="sup">С одной яблони… <i>/ From one apple tree…</i></td><td>Звуки игры: сбор, касса</td></tr>
+      <tr><td class="time">17–25</td><td>Таймлапс: прилавки, печь пирогов, помощники, очередь, кучи монет. Склейки каждые 1,5 с, ускорение ×2–×4</td><td class="src g">Игра, постановка</td><td class="sup">…до целого рынка <i>/ …to a whole market</i></td><td>Монеты, стройка</td></tr>
+      <tr><td class="time">25–35</td><td>Главарь приземляется в лагерь, бой, победа, окно с ключом</td><td class="src g">Игра</td><td class="sup">Прогони банду! <i>/ Kick out the gang!</i></td><td>Музыка боя из игры, фанфары</td></tr>
+      <tr><td class="time">35–40</td><td>Карта долины: облака расходятся над новым рынком. Логотип и кнопка</td><td class="src g">Игра + графика</td><td class="sup">Village Market · Играй бесплатно <i>/ Play free</i></td><td>Финальный аккорд</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div><h3>Как делаем хук</h3><p class="small">Ключевые кадры 1080×1920 рисует GPT Image по этой раскадровке, героев берёт с арта игры. Seedance 2.5 оживляет их через image-to-video: три шота по 2,5–3 с, у последнего шота задан и первый, и последний кадр. Последним кадром ставим кадр из игры, поэтому ролик перетекает в геймплей без склейки.</p></div>
+    <div><h3>Риски</h3><p class="small">У енота на арте нож. В хуке его прячем, чтобы не было вопросов к модерации. Бой с главарём записываем с подготовленного сохранения.</p></div>
+  </div>
+  <div class="prompt">Seedance, шот 1 (черновик): night market stall piled with lattice pies and gold coins, the raccoon bandit in a black wide-brimmed hat sweeps the pies into a burlap sack, slow push-in, moonlight, stylized low-poly 3D animation, sneaky mood</div>
+</section>
+
+<!-- ============================== B ============================== -->
+<section class="sheet" id="b">
+  <div class="sheet-head">
+    <div class="letter">B</div>
+    <h2>Башня</h2>
+    <p class="pitch">Лисичка несёт через рынок башню из пирогов выше крыш. Дальше игрок сам растит стопку от 4 до 16 и раскручивает рынок.</p>
+  </div>
+  <div class="tags"><span class="tag">сатисфай</span><span class="tag">вау-масштаб</span><span class="tag">ядро жанра: стопка</span></div>
+  <p class="why">Почему сработает: стопка — главная механика жанра «носи и продавай» (так продают Burger Please и My Mini Mart). Её понятно за секунду без звука, и она честно продолжается в игре: стопку там правда растят улучшениями.</p>
+  <div class="strip-wrap"><div class="strip">
+    <div class="fr hook"><img src="board/b_hook_1.jpg" alt="Башня товаров выше крыш"><span class="t">0,0–3,0</span><span class="c">Низкий ракурс: башня выше крыш, жители в шоке</span></div>
+    <div class="fr hook"><img src="board/b_hook_2.jpg" alt="Башня шатается"><span class="t">3,0–5,5</span><span class="c">Шатается, под ноги бежит поросёнок, пирог слетает</span></div>
+    <div class="fr hook"><img src="board/b_hook_3.jpg" alt="Ловит пирог хвостом"><span class="t">5,5–7,5</span><span class="c">Ловит пирог хвостом и подмигивает</span></div>
+    <div class="fr hook"><img src="board/b_hook_4.jpg" alt="Фонтан монет"><span class="t">7,5–10,0</span><span class="c">Хлоп башню на прилавок — из кассы фонтан монет</span></div>
+    <div class="seam">склейка в игру</div>
+    <div class="fr game"><img src="board/b_game_1.jpg" alt="Стопка 4"><span class="t">10–18</span><span class="c">Камера за спиной: стопка 4 → 8 → 12, улучшение «Руки»</span></div>
+    <div class="fr game"><img src="board/b_game_2.jpg" alt="Высокая стопка"><span class="t">18–26</span><span class="c">Высокая стопка, товар дугой летит на полки</span></div>
+    <div class="fr game"><img src="board/b_game_3.jpg" alt="Выкладка и касса"><span class="t">26–34</span><span class="c">Касса, кучки монет, помощники со своими стопками</span></div>
+    <div class="fr game"><img src="board/b_game_4.jpg" alt="Большой рынок"><span class="t">34–40</span><span class="c">Общий план большого рынка, логотип и кнопка</span></div>
+  </div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Время</th><th>Кадр</th><th>Источник</th><th>Надпись (RU / EN)</th><th>Звук</th></tr></thead>
+    <tbody>
+      <tr><td class="time">0,0–3,0</td><td>Низкий ракурс: Лисичка шагает с башней из яблок, пирогов и хлеба выше крыш, жители раскрыли рты</td><td class="src h">Seedance</td><td class="sup">Сколько ты унесёшь? <i>/ How much can you carry?</i></td><td>Скрип башни, «ооо» толпы</td></tr>
+      <tr><td class="time">3,0–5,5</td><td>Башня шатается, поросёнок бежит под ноги, пирог слетает с верха</td><td class="src h">Seedance</td><td>—</td><td>Напряжённая пауза, свист</td></tr>
+      <tr><td class="time">5,5–7,5</td><td>Ловит пирог хвостом на одной ноге, подмигивает</td><td class="src h">Seedance</td><td>—</td><td>«Дзынь», смешок</td></tr>
+      <tr><td class="time">7,5–10,0</td><td>Ставит башню на прилавок — фонтан монет из кассы, аплодисменты. Последний кадр = кадр из игры</td><td class="src h">Seedance</td><td class="sup">Неси больше! <i>/ Carry more!</i></td><td>Касса, дождь монет</td></tr>
+      <tr><td class="time">10–18</td><td>Своя камера за спиной: стопка растёт 4 → 8 → 12, вспышки улучшения «Руки» на доске</td><td class="src g">Игра, постановка</td><td class="sup">4 → 8 → 12 → 16</td><td>Подбор товара по нарастающей</td></tr>
+      <tr><td class="time">18–26</td><td>Выкладка: товар дугой летит на полки, покупатели разбирают, касса, кучка монет, сбор</td><td class="src g">Игра</td><td class="sup">Продавай быстрее всех <i>/ Sell faster</i></td><td>Касса, монеты</td></tr>
+      <tr><td class="time">26–34</td><td>Помощники носят свои стопки, общий план оживлённого рынка, ×2 прибыль</td><td class="src g">Игра, постановка</td><td class="sup">Найми помощников <i>/ Hire helpers</i></td><td>Главная тема</td></tr>
+      <tr><td class="time">34–40</td><td>Лисичка с максимальной стопкой бежит на камеру, за ней рынок 4. Логотип и кнопка</td><td class="src g">Игра + графика</td><td class="sup">Village Market · Играй бесплатно <i>/ Play free</i></td><td>Финальный аккорд</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div><h3>Как делаем хук</h3><p class="small">Тот же конвейер: GPT Image → Seedance image-to-video. Шоты 1–2 можно снять одним проходом reference-to-video на 5–6 с, если модель удержит башню. Если она начнёт «плыть», режем на короткие шоты.</p></div>
+    <div><h3>Риски</h3><p class="small">В игре стопка максимум 16, в хуке — сотни: это гипербола, на AppLovin так принято. В геймплее показываем реальные 16. Для съёмки нужна прокачанная стопка: берём подготовленное сохранение.</p></div>
+  </div>
+  <div class="prompt">Seedance, шот 1 (черновик): low-angle tracking shot, the fox girl shopkeeper strides through a busy village market carrying a wobbling tower of apples, pies and bread taller than the rooftops, villagers gasp, stylized low-poly 3D animation, sunny, playful</div>
+</section>
+
+<!-- ============================== C ============================== -->
+<section class="sheet" id="c">
+  <div class="sheet-head">
+    <div class="letter">C</div>
+    <h2>Очередь</h2>
+    <p class="pitch">Бесконечная очередь доводит Лисичку до паники. Игрок наводит порядок: второй прилавок, кассир, помощники.</p>
+  </div>
+  <div class="tags"><span class="tag">челлендж</span><span class="tag">«справишься лучше?»</span><span class="tag">реальная механика очереди</span></div>
+  <p class="why">Почему сработает: хуки «помоги / сделай лучше» дают высокий CTR в казуале, а механика настоящая: покупатели и правда злятся и уходят, если их долго не обслужить. Обходимся без выдуманных «98% не справятся».</p>
+  <div class="strip-wrap"><div class="strip">
+    <div class="fr hook"><img src="board/c_hook_1.jpg" alt="Очередь до горизонта"><span class="t">0,0–3,0</span><span class="c">Утро, улыбка, камера отъезжает: очередь до горизонта</span></div>
+    <div class="fr hook"><img src="board/c_hook_2.jpg" alt="Хаос у прилавка"><span class="t">3,0–6,0</span><span class="c">Хаос: часы, крики, яблоки летят</span></div>
+    <div class="fr hook"><img src="board/c_hook_3.jpg" alt="Енот уносит ящик"><span class="t">6,0–8,0</span><span class="c">А на фоне енот уносит ящик яблок</span></div>
+    <div class="fr hook"><img src="board/c_hook_4.jpg" alt="Стоп-кадр паники"><span class="t">8,0–10,0</span><span class="c">Стоп-кадр: паника крупно</span></div>
+    <div class="seam">склейка в игру</div>
+    <div class="fr game"><img src="board/c_game_1.jpg" alt="Очередь у одного прилавка"><span class="t">10–17</span><span class="c">Очередь у одного прилавка, злые смайлики, уходят</span></div>
+    <div class="fr game"><img src="board/c_game_2.jpg" alt="Второй прилавок"><span class="t">17–26</span><span class="c">Второй прилавок, кассир, помощники</span></div>
+    <div class="fr game"><img src="board/c_game_3.jpg" alt="Порядок"><span class="t">26–34</span><span class="c">Порядок: довольные покупатели, монеты</span></div>
+    <div class="fr game"><img src="board/c_game_4.jpg" alt="Повозка и уровень"><span class="t">34–40</span><span class="c">Повозка с заказом, новый уровень, логотип</span></div>
+  </div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Время</th><th>Кадр</th><th>Источник</th><th>Надпись (RU / EN)</th><th>Звук</th></tr></thead>
+    <tbody>
+      <tr><td class="time">0,0–3,0</td><td>Утро, Лисичка улыбается за прилавком. Камера отъезжает: очередь зверят тянется до горизонта</td><td class="src h">Seedance</td><td class="sup">Открыла рынок… <i>/ Opened my market…</i></td><td>Весёлая мелодия, нарастающий гул</td></tr>
+      <tr><td class="time">3,0–6,0</td><td>Хаос: свин стучит по часам, лягушка кричит, кошка скрестила руки, яблоки летают</td><td class="src h">Seedance</td><td class="sup">…и началось <i>/ …and then this</i></td><td>Гомон толпы, музыка сбивается</td></tr>
+      <tr><td class="time">6,0–8,0</td><td>На фоне енот тихо уносит ящик яблок, Лисичка замечает</td><td class="src h">Seedance</td><td>—</td><td>Крадущиеся шаги</td></tr>
+      <tr><td class="time">8,0–10,0</td><td>Стоп-кадр паники крупным планом</td><td class="src h">Seedance</td><td class="sup">Справишься лучше? <i>/ Can you do better?</i></td><td>Скрип пластинки, тишина</td></tr>
+      <tr><td class="time">10–17</td><td>Длинная очередь у одного прилавка, пустая полка, злые смайлики, покупатель уходит</td><td class="src g">Игра, постановка</td><td class="sup">Покупатели уходят! <i>/ Customers are leaving!</i></td><td>Недовольные звуки игры</td></tr>
+      <tr><td class="time">17–26</td><td>Круг стройки → второй прилавок, найм кассира и помощников, очередь тает</td><td class="src g">Игра</td><td class="sup">Строй и нанимай <i>/ Build and hire</i></td><td>Стройка, найм</td></tr>
+      <tr><td class="time">26–34</td><td>Всё работает: довольные смайлики, касса, монеты, повозка уезжает с заказом</td><td class="src g">Игра</td><td class="sup">Вот это рынок! <i>/ Now that’s a market!</i></td><td>Главная тема, касса</td></tr>
+      <tr><td class="time">34–40</td><td>Новый уровень, общий план, логотип и кнопка</td><td class="src g">Игра + графика</td><td class="sup">Village Market · Играй бесплатно <i>/ Play free</i></td><td>Финальный аккорд</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div><h3>Как делаем хук</h3><p class="small">Шот 1 — один кадр с отъездом камеры (image-to-video: первый кадр — Лисичка крупно, последний — очередь до горизонта). Шоты 2–3 через reference-to-video с героями. Стоп-кадр делаем при монтаже, без красного круга.</p></div>
+    <div><h3>Риски</h3><p class="small">Толпа в Seedance может разъехаться по стилю, поэтому даём до 8 референсов жителей. Злых покупателей в игре проще поставить вручную, чем ждать: делаем постановку, как StoreStage Алёны для скриншотов стора.</p></div>
+  </div>
+  <div class="prompt">Seedance, шот 1 (черновик): the fox girl smiles behind her tiny fruit stall, the camera pulls back and up to reveal an endless queue of animal customers winding to the horizon, stylized low-poly 3D animation, morning light, comedic</div>
+</section>
+
+<!-- ============================== compare + plan ============================== -->
+<section class="sheet">
+  <h2>Сравнение</h2>
+  <div class="table-wrap"><table class="cmp">
+    <thead><tr><th></th><th>A · Ограбление</th><th>B · Башня</th><th>C · Очередь</th></tr></thead>
+    <tbody>
+      <tr><td>Чем цепляет</td><td>Злодей и обида</td><td>Масштаб и «вау»</td><td>Хаос и вызов игроку</td></tr>
+      <tr><td>Без звука понятно</td><td>Да, через лица</td><td>Да, лучше всех</td><td>Да</td></tr>
+      <tr><td>Связь хука с игрой</td><td>Бой с главарём в игре</td><td>Стопка в игре</td><td>Очередь и найм в игре</td></tr>
+      <tr><td>Сложность Seedance</td><td>Средняя: 2 героя</td><td>Высокая: башня должна держать форму</td><td>Высокая: толпа</td></tr>
+      <tr><td>Что подготовить в игре</td><td>Сохранение с боем, карта</td><td>Прокачанная стопка, рынок 4</td><td>Постановка очереди</td></tr>
+      <tr><td>Seedance, оценка</td><td class="mono">≈ $3–4</td><td class="mono">≈ $4–5</td><td class="mono">≈ $4–5</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Оценка: 10 с финала в 1080p плюс 2–3 черновика в 480p (режим draft) на каждый шот, по прайсу Seedance 2.5 на Atlas ($0.134 за секунду). Все три хука вместе — примерно $10–15.</p>
+</section>
+
+<section class="sheet">
+  <h2>Как будем делать</h2>
+  <div class="plan">
+    <div class="step"><p><b>Утверждение.</b> Выбираешь сценарии и пишешь правки: что поменять в кадре, в надписях, в порядке.</p></div>
+    <div class="step"><p><b>Ключевые кадры хука.</b> GPT Image рисует 3–4 кадра на хук в 1080×1920. Героев берём с арта игры, чтобы Лисичка и енот были те же.</p></div>
+    <div class="step"><p><b>Seedance 2.5 через Atlas.</b> Image-to-video от ключевых кадров. Сначала черновики 480p, потом финал 1080p. Звук Seedance берём там, где он к месту.</p></div>
+    <div class="step"><p><b>Геймплей.</b> Пишем из версии 1.0.0 в 1080×1920. Готовим сохранения под нужные сцены, расставляем покупателей и ставим свои камеры: за спиной, низкий ракурс, общий план. Интерфейс игры оставляем: зритель видит настоящую игру.</p></div>
+    <div class="step"><p><b>Монтаж.</b> Надписи шрифтом игры, музыка и звуки из игры, громкость −14 LUFS. Каждый ролик в двух версиях: RU и EN.</p></div>
+    <div class="step"><p><b>Сдача.</b> MP4 H.264 1080×1920 по каждому сценарию и языку. Плюс end card для AppLovin (картинка 1080×1920 и GIF), её AppLovin показывает после видео.</p></div>
+  </div>
+</section>
+
+<section class="approve">
+  <h3>Статус</h3>
+  <p>25.11: все три сценария утверждены. Хуки первой версии сгенерированы (вверху страницы). Дальше — запись геймплея из игры и монтаж, версии RU и EN.</p>
+</section>
+
+</div>
+
+</body>
+</html>
